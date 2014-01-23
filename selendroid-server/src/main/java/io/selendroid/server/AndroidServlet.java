@@ -41,6 +41,7 @@ import io.selendroid.server.handler.GetElementSelected;
 import io.selendroid.server.handler.GetElementSize;
 import io.selendroid.server.handler.GetElementTagName;
 import io.selendroid.server.handler.GetPageTitle;
+import io.selendroid.server.handler.GetScreenOrientation;
 import io.selendroid.server.handler.GetScreenState;
 import io.selendroid.server.handler.GetText;
 import io.selendroid.server.handler.GetWindowHandle;
@@ -57,6 +58,7 @@ import io.selendroid.server.handler.Move;
 import io.selendroid.server.handler.NewSession;
 import io.selendroid.server.handler.OpenUrl;
 import io.selendroid.server.handler.Refresh;
+import io.selendroid.server.handler.RotateScreen;
 import io.selendroid.server.handler.Scroll;
 import io.selendroid.server.handler.SendKeyToActiveElement;
 import io.selendroid.server.handler.SendKeys;
@@ -122,6 +124,9 @@ public class AndroidServlet extends BaseServlet {
     postHandler.put("/wd/hub/session/:sessionId/back", GoBack.class);
     postHandler.put("/wd/hub/session/:sessionId/refresh", Refresh.class);
     
+    getHandler.put("/wd/hub/session/:sessionId/orientation", GetScreenOrientation.class);
+    postHandler.put("/wd/hub/session/:sessionId/orientation", RotateScreen.class);
+    
     // Advanced Touch API
     postHandler.put("/wd/hub/session/:sessionId/touch/click", SingleTapOnElement.class);
     postHandler.put("/wd/hub/session/:sessionId/touch/down", Down.class);
@@ -137,8 +142,6 @@ public class AndroidServlet extends BaseServlet {
     postHandler.put("/wd/hub/session/:sessionId/frame", FrameSwitchHandler.class);
 
     // currently not yet supported
-    getHandler.put("/wd/hub/session/:sessionId/orientation", UnknownCommandHandler.class);
-    postHandler.put("/wd/hub/session/:sessionId/orientation", UnknownCommandHandler.class);
     postHandler.put("/wd/hub/session/:sessionId/timeouts", UnknownCommandHandler.class);
     postHandler
         .put("/wd/hub/session/:sessionId/timeouts/async_script", UnknownCommandHandler.class);
